@@ -2,7 +2,32 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
                        xmlns:s="library://ns.adobe.com/flex/spark">
 	<fx:Script><![CDATA[
-		import mx.controls.Alert;
 		]]></fx:Script>
-	<s:Button click="Alert.show('Hello, world')" label="Say Hello" />
+
+	<s:layout>
+		<s:VerticalLayout
+				paddingTop="20" paddingLeft="20"
+				paddingBottom="20" paddingRight="20"
+				gap="20" />
+	</s:layout>
+
+	<s:HGroup width="100%">
+		<s:Label text="URL:"
+		         fontSize="24" />
+
+		<s:TextInput id="urlTextInput"
+		             width="100%"
+		             prompt="Enter an URL…" />
+
+		<s:Button id="indexingButton" label="OK" />
+	</s:HGroup>
+
+	<s:DataGrid id="linksDataGrid" width="100%" height="100%" />
+
+	<s:Group width="100%">
+		<s:Button id="exportCsvButton"
+		          label="Export to CSV"
+		          right="0" bottom="0" />
+	</s:Group>
+
 </s:WindowedApplication>
