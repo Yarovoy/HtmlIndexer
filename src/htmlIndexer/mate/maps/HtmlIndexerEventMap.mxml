@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mate:EventMap xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:mate="http://mate.asfusion.com/">
+
+	<fx:Script>
+		<![CDATA[
+		// Place your ActionScript here.
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Declare injectors and handlers here. -->
+	</fx:Declarations>
+
+</mate:EventMap>

@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
-                       xmlns:s="library://ns.adobe.com/flex/spark">
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       xmlns:maps="htmlIndexer.mate.maps.*">
 	<fx:Script><![CDATA[
+		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]></fx:Script>
+
+	<fx:Declarations>
+		<maps:HtmlIndexerEventMap />
+	</fx:Declarations>
 
 	<s:layout>
 		<s:VerticalLayout
@@ -17,9 +23,12 @@
 
 		<s:TextInput id="urlTextInput"
 		             width="100%"
-		             prompt="Enter an URL…" />
+		             prompt="Enter an URL…"
+		             enter="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE))" />
 
-		<s:Button id="indexingButton" label="OK" />
+		<s:Button id="indexingButton"
+		          label="OK"
+		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE))" />
 	</s:HGroup>
 
 	<s:DataGrid id="linksDataGrid" width="100%" height="100%" />
@@ -27,7 +36,8 @@
 	<s:Group width="100%">
 		<s:Button id="exportCsvButton"
 		          label="Export to CSV"
-		          right="0" bottom="0" />
+		          right="0" bottom="0"
+		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.EXPORT_CSV))" />
 	</s:Group>
 
 </s:WindowedApplication>
