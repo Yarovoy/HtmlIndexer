@@ -4,12 +4,40 @@
 
 	<fx:Script>
 		<![CDATA[
-		// Place your ActionScript here.
+		import com.asfusion.mate.utils.debug.Debugger;
+
+		import htmlIndexer.mate.business.IndexManager;
+		import htmlIndexer.mate.commands.ExportCsvCommand;
+		import htmlIndexer.mate.commands.IndexCommand;
+		import htmlIndexer.mate.commands.IndexManagerCommand;
+		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
-		<!-- Declare injectors and handlers here. -->
+
+		<mate:Debugger level="{Debugger.ALL}" />
+
+		<!-- ====================================================================== -->
+		<!-- Injections -->
+		<!-- ====================================================================== -->
+
+		<mate:Injectors target="{IndexManagerCommand}" includeDerivatives="true">
+			<mate:PropertyInjector targetKey="indexManager" source="{IndexManager}" />
+		</mate:Injectors>
+
+		<!-- ====================================================================== -->
+		<!-- Event handlers -->
+		<!-- ====================================================================== -->
+
+		<mate:EventHandlers type="{HtmlIndexerEvent.INDEX_PAGE}">
+			<mate:CommandInvoker generator="{IndexCommand}" />
+		</mate:EventHandlers>
+
+		<mate:EventHandlers type="{HtmlIndexerEvent.EXPORT_CSV}">
+			<mate:CommandInvoker generator="{ExportCsvCommand}" />
+		</mate:EventHandlers>
+
 	</fx:Declarations>
 
 </mate:EventMap>
