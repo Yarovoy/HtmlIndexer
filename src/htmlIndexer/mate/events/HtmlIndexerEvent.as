@@ -14,12 +14,21 @@ package htmlIndexer.mate.events
 		public static const EXPORT_CSV:String = 'exportCsv';
 
 		// ----------------------------------------------------------------------
+		// Public props
+		// ----------------------------------------------------------------------
+
+		public var url:String;
+
+		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------
 
-		public function HtmlIndexerEvent(type:String, bubbles:Boolean = true, cancelable:Boolean = false)
+		public function HtmlIndexerEvent(type:String, url:String = null, bubbles:Boolean = true,
+		                                 cancelable:Boolean = false)
 		{
 			super(type, bubbles, cancelable);
+
+			this.url = url;
 		}
 
 		// ----------------------------------------------------------------------
@@ -28,7 +37,7 @@ package htmlIndexer.mate.events
 
 		override public function clone():Event
 		{
-			return new HtmlIndexerEvent(type, bubbles, cancelable);
+			return new HtmlIndexerEvent(type, url, bubbles, cancelable);
 		}
 	}
 }

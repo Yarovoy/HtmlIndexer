@@ -1,13 +1,19 @@
 <?xml version="1.0"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
                        xmlns:s="library://ns.adobe.com/flex/spark"
-                       xmlns:maps="htmlIndexer.mate.maps.*">
+                       xmlns:maps="htmlIndexer.mate.maps.*"
+                       xmlns:validators="htmlIndexer.validators.*">
 	<fx:Script><![CDATA[
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]></fx:Script>
 
 	<fx:Declarations>
 		<maps:HtmlIndexerEventMap />
+
+		<validators:URLValidator
+				source="{urlTextInput}"
+				property="text"
+				required="true" />
 	</fx:Declarations>
 
 	<s:layout>
@@ -24,11 +30,13 @@
 		<s:TextInput id="urlTextInput"
 		             width="100%"
 		             prompt="Enter an URL…"
-		             enter="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE))" />
+		             enter="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE, urlTextInput.text))">
+
+		</s:TextInput>
 
 		<s:Button id="indexingButton"
 		          label="OK"
-		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE))" />
+		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE, urlTextInput.text))" />
 	</s:HGroup>
 
 	<s:DataGrid id="linksDataGrid" width="100%" height="100%" />

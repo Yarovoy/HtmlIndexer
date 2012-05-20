@@ -31,7 +31,9 @@
 		<!-- ====================================================================== -->
 
 		<mate:EventHandlers type="{HtmlIndexerEvent.INDEX_PAGE}">
-			<mate:CommandInvoker generator="{IndexCommand}" />
+			<mate:CommandInvoker generator="{IndexCommand}" cache="local">
+				<mate:Property targetKey="url" source="{event}" sourceKey="url" />
+			</mate:CommandInvoker>
 		</mate:EventHandlers>
 
 		<mate:EventHandlers type="{HtmlIndexerEvent.EXPORT_CSV}">
