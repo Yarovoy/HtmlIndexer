@@ -5,15 +5,36 @@
                        xmlns:validators="htmlIndexer.validators.*">
 	<fx:Script><![CDATA[
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
+
+		import mx.events.ValidationResultEvent;
+
+		private function validateUrlAndDispatchIndexPageEvent():void
+		{
+			const validationResult:ValidationResultEvent = urlValidator.validate();
+			if (validationResult.type == ValidationResultEvent.INVALID)
+			{
+				urlValidator.triggerEvent = Event.CHANGE;
+				return;
+			}
+
+			urlValidator.triggerEvent = '';
+
+			dispatchEvent(
+					new HtmlIndexerEvent(
+							HtmlIndexerEvent.INDEX_PAGE,
+							urlTextInput.text
+					)
+			);
+		}
 		]]></fx:Script>
 
 	<fx:Declarations>
 		<maps:HtmlIndexerEventMap />
 
-		<validators:URLValidator
-				source="{urlTextInput}"
-				property="text"
-				required="true" />
+		<validators:URLValidator id="urlValidator"
+		                         source="{urlTextInput}"
+		                         property="text"
+		                         triggerEvent="" />
 	</fx:Declarations>
 
 	<s:layout>
@@ -30,13 +51,13 @@
 		<s:TextInput id="urlTextInput"
 		             width="100%"
 		             prompt="Enter an URL…"
-		             enter="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE, urlTextInput.text))">
+		             enter="validateUrlAndDispatchIndexPageEvent();">
 
 		</s:TextInput>
 
 		<s:Button id="indexingButton"
 		          label="OK"
-		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.INDEX_PAGE, urlTextInput.text))" />
+		          click="validateUrlAndDispatchIndexPageEvent();" />
 	</s:HGroup>
 
 	<s:DataGrid id="linksDataGrid" width="100%" height="100%" />
