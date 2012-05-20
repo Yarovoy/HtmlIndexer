@@ -12,7 +12,7 @@ package htmlIndexer.validators
 		// ----------------------------------------------------------------------
 
 		private static const DEFAULT_INVALID_URL_ERROR:String = "This is an invalid URL.";
-		private static const URL_REGEXP:RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+		private static const URL_REGEXP:RegExp = /https?:\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
 		// ----------------------------------------------------------------------
 		// Private props
