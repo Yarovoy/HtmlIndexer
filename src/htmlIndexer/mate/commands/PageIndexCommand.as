@@ -159,6 +159,7 @@ package htmlIndexer.mate.commands
 				);
 
 				indexManager.currentPage = page;
+				indexManager.lastLinks = page.links;
 			}
 
 			releaseLoaderAndTimer();

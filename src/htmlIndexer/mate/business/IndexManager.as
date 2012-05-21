@@ -23,6 +23,9 @@ package htmlIndexer.mate.business
 		[Bindable]
 		public var currentPage:PageVO;
 
+		[Bindable]
+		public var lastLinks:ArrayCollection;
+
 		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------

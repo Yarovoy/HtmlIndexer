@@ -8,7 +8,6 @@
 
 		import htmlIndexer.mate.business.IndexManager;
 		import htmlIndexer.mate.commands.ExportCsvCommand;
-		import htmlIndexer.mate.commands.PageIndexCommand;
 		import htmlIndexer.mate.commands.IndexManagerCommand;
 		import htmlIndexer.mate.commands.PageIndexCommand;
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
@@ -25,6 +24,12 @@
 
 		<mate:Injectors target="{IndexManagerCommand}" includeDerivatives="true">
 			<mate:PropertyInjector targetKey="indexManager" source="{IndexManager}" />
+		</mate:Injectors>
+
+		<mate:Injectors target="HtmlIndexer">
+			<mate:PropertyInjector
+					source="{IndexManager}" sourceKey="lastLinks"
+					targetKey="lastLinks" />
 		</mate:Injectors>
 
 		<!-- ====================================================================== -->
