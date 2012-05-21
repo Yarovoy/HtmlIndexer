@@ -3,6 +3,8 @@ package htmlIndexer.mate.vos
 
 	import flash.events.EventDispatcher;
 
+	import mx.collections.ArrayCollection;
+
 	public class PageVO extends EventDispatcher
 	{
 
@@ -14,14 +16,16 @@ package htmlIndexer.mate.vos
 		public var url:String;
 
 		[Bindable]
-		public var links:Array = [];
+		public var links:ArrayCollection;
 
 		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------
 
-		public function PageVO()
+		public function PageVO(url:String = null, links:Array = null)
 		{
+			this.url = url;
+			this.links = links ? new ArrayCollection(links) : new ArrayCollection();
 		}
 	}
 }

@@ -13,6 +13,7 @@ package htmlIndexer.mate.commands
 	import flash.utils.Timer;
 
 	import htmlIndexer.mate.vos.LinkVO;
+	import htmlIndexer.mate.vos.PageVO;
 
 	public class IndexCommand extends IndexManagerCommand
 	{
@@ -149,9 +150,15 @@ package htmlIndexer.mate.commands
 		{
 			if (urlLoader.data && urlLoader.data.toString().length)
 			{
-				parseLinks(
+				const links:Array = parseLinks(
 						urlLoader.data.toString()
 				);
+				const page:PageVO = new PageVO(
+						url,
+						links
+				);
+
+				indexManager.currentPage = page;
 			}
 
 			releaseLoaderAndTimer();
