@@ -8,8 +8,9 @@
 
 		import htmlIndexer.mate.business.IndexManager;
 		import htmlIndexer.mate.commands.ExportCsvCommand;
-		import htmlIndexer.mate.commands.IndexCommand;
+		import htmlIndexer.mate.commands.PageIndexCommand;
 		import htmlIndexer.mate.commands.IndexManagerCommand;
+		import htmlIndexer.mate.commands.PageIndexCommand;
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]>
 	</fx:Script>
@@ -31,7 +32,7 @@
 		<!-- ====================================================================== -->
 
 		<mate:EventHandlers type="{HtmlIndexerEvent.INDEX_PAGE}">
-			<mate:CommandInvoker generator="{IndexCommand}" cache="local">
+			<mate:CommandInvoker generator="{PageIndexCommand}" cache="local">
 				<mate:Property targetKey="url" source="{event}" sourceKey="url" />
 			</mate:CommandInvoker>
 		</mate:EventHandlers>

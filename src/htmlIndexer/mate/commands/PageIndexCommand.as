@@ -14,11 +14,10 @@ package htmlIndexer.mate.commands
 
 	import htmlIndexer.mate.vos.LinkVO;
 	import htmlIndexer.mate.vos.PageVO;
+	import htmlIndexer.utils.RegExpPatterns;
 
-	public class IndexCommand extends IndexManagerCommand
+	public class PageIndexCommand extends IndexManagerCommand
 	{
-
-		public static const WHOLE_LINK_PATTERN:RegExp = /<a\s[^>]*href\s*=\s*"([^"]*)"[^>]*>(.*?)<\/a>/g;
 
 		public static const TIMEOUT_DELAY:int = 30000;
 
@@ -39,7 +38,7 @@ package htmlIndexer.mate.commands
 		// Constructor
 		// ----------------------------------------------------------------------
 
-		public function IndexCommand()
+		public function PageIndexCommand()
 		{
 		}
 
@@ -51,14 +50,14 @@ package htmlIndexer.mate.commands
 		{
 			const result:Array = [];
 
-			var aTag:Array = WHOLE_LINK_PATTERN.exec(pageContent);
+			var aTag:Array = RegExpPatterns.HTML_LINK.exec(pageContent);
 			while (aTag)
 			{
 				result.push(
 						new LinkVO(aTag[1], aTag[2])
 				);
 
-				aTag = WHOLE_LINK_PATTERN.exec(pageContent);
+				aTag = RegExpPatterns.HTML_LINK.exec(pageContent);
 			}
 
 			return result;

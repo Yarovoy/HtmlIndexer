@@ -1,6 +1,8 @@
 package htmlIndexer.validators
 {
 
+	import htmlIndexer.utils.RegExpPatterns;
+
 	import mx.validators.ValidationResult;
 	import mx.validators.Validator;
 
@@ -12,7 +14,6 @@ package htmlIndexer.validators
 		// ----------------------------------------------------------------------
 
 		private static const DEFAULT_INVALID_URL_ERROR:String = "This is an invalid URL.";
-		private static const URL_REGEXP:RegExp = /https?:\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
 		// ----------------------------------------------------------------------
 		// Private props
@@ -69,7 +70,7 @@ package htmlIndexer.validators
 
 		public static function isUrl(s:String):Boolean
 		{
-			return URL_REGEXP.test(s);
+			return RegExpPatterns.URL_WITH_PROTOCOL.test(s);
 		}
 	}
 }
