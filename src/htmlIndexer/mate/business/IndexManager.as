@@ -13,6 +13,9 @@ package htmlIndexer.mate.business
 		[Bindable]
 		public var pages:Array = [];
 
+		[Bindable]
+		public var state:String;
+
 		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------
