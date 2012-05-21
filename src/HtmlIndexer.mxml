@@ -2,12 +2,15 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
                        xmlns:s="library://ns.adobe.com/flex/spark"
                        xmlns:maps="htmlIndexer.mate.maps.*"
-                       xmlns:validators="htmlIndexer.validators.*">
+                       xmlns:validators="htmlIndexer.validators.*" xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script><![CDATA[
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 
 		import mx.collections.ArrayCollection;
 		import mx.events.ValidationResultEvent;
+
+		[Bindable]
+		public var linksList:ArrayCollection;
 
 		private function validateUrlAndDispatchIndexPageEvent():void
 		{
@@ -27,9 +30,6 @@
 					)
 			);
 		}
-
-		[Bindable]
-		public var lastLinks:ArrayCollection;
 		]]></fx:Script>
 
 	<fx:Declarations>
@@ -64,8 +64,19 @@
 	</s:HGroup>
 
 	<s:DataGrid id="linksDataGrid"
-	            dataProvider="{lastLinks}"
-	            width="100%" height="100%" />
+	            dataProvider="{linksList}"
+	            width="100%" height="100%"
+	            alternatingRowColors="[#FFFFFF, #EEEEEE]">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn dataField="text" headerText="Text" />
+				<s:GridColumn dataField="url" headerText="URL" />
+			</s:ArrayList>
+		</s:columns>
+		<s:typicalItem>
+			<s:DataItem text="Войти&amp;nbsp;в&amp;nbsp;почту" url="http://mail.yandex.ru" />
+		</s:typicalItem>
+	</s:DataGrid>
 
 	<s:Group width="100%">
 		<s:Button id="exportCsvButton"

@@ -29,7 +29,7 @@
 		<mate:Injectors target="HtmlIndexer">
 			<mate:PropertyInjector
 					source="{IndexManager}" sourceKey="lastLinks"
-					targetKey="lastLinks" />
+					targetKey="linksList" />
 		</mate:Injectors>
 
 		<!-- ====================================================================== -->
