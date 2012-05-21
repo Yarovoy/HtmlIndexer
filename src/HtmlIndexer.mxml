@@ -50,10 +50,9 @@
 
 		<s:TextInput id="urlTextInput"
 		             width="100%"
+		             text="http://ya.ru"
 		             prompt="Enter an URL…"
-		             enter="validateUrlAndDispatchIndexPageEvent();">
-
-		</s:TextInput>
+		             enter="validateUrlAndDispatchIndexPageEvent();" />
 
 		<s:Button id="indexingButton"
 		          label="OK"

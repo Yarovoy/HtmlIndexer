@@ -11,17 +11,19 @@ package htmlIndexer.mate.vos
 		// ----------------------------------------------------------------------
 
 		[Bindable]
-		public var text:String;
+		public var url:String;
 
 		[Bindable]
-		public var url:String;
+		public var text:String;
 
 		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------
 
-		public function LinkVO()
+		public function LinkVO(url:String = null, text:String = null)
 		{
+			this.url = url;
+			this.text = text;
 		}
 	}
 }

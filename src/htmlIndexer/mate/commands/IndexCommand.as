@@ -12,11 +12,12 @@ package htmlIndexer.mate.commands
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
 
+	import htmlIndexer.mate.vos.LinkVO;
+
 	public class IndexCommand extends IndexManagerCommand
 	{
 
-//		public static const LINK_PATTERN:RegExp = /<a\s[^>]*href\s*=\s*\"([^\"]*)\"[^>]*>(.*?)<\/a>/g;
-		public static const LINK_PATTERN:RegExp = /(?i)<a([^>]+)>(.+?)<\/a>/g;
+		public static const WHOLE_LINK_PATTERN:RegExp = /<a\s[^>]*href\s*=\s*"([^"]*)"[^>]*>(.*?)<\/a>/g;
 
 		public static const TIMEOUT_DELAY:int = 30000;
 
@@ -44,6 +45,23 @@ package htmlIndexer.mate.commands
 		// ----------------------------------------------------------------------
 		// Private methods
 		// ----------------------------------------------------------------------
+
+		private static function parseLinks(pageContent:String):Array
+		{
+			const result:Array = [];
+
+			var aTag:Array = WHOLE_LINK_PATTERN.exec(pageContent);
+			while (aTag)
+			{
+				result.push(
+						new LinkVO(aTag[1], aTag[2])
+				);
+
+				aTag = WHOLE_LINK_PATTERN.exec(pageContent);
+			}
+
+			return result;
+		}
 
 		private function addLoaderListeners(dispatcher:EventDispatcher):void
 		{
@@ -129,13 +147,11 @@ package htmlIndexer.mate.commands
 
 		private function urlLoader_completeHandler(event:Event):void
 		{
-			const pageContent:String = urlLoader.data.toString();
-
-			const links:Array = pageContent.match(LINK_PATTERN);
-
-			for each(var a:String in links)
+			if (urlLoader.data && urlLoader.data.toString().length)
 			{
-				trace(a);
+				parseLinks(
+						urlLoader.data.toString()
+				);
 			}
 
 			releaseLoaderAndTimer();
