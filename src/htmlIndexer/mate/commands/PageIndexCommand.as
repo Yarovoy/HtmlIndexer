@@ -49,15 +49,16 @@ package htmlIndexer.mate.commands
 		private static function parseLinks(pageContent:String):Array
 		{
 			const result:Array = [];
+			const regExp:RegExp = new RegExp(RegExpPatterns.HTML_LINK, 'gi');
 
-			var aTag:Array = RegExpPatterns.HTML_LINK.exec(pageContent);
+			var aTag:Array = regExp.exec(pageContent);
 			while (aTag)
 			{
 				result.push(
 						new LinkVO(aTag[1], aTag[2])
 				);
 
-				aTag = RegExpPatterns.HTML_LINK.exec(pageContent);
+				aTag = regExp.exec(pageContent);
 			}
 
 			return result;

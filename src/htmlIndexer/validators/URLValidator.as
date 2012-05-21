@@ -70,7 +70,8 @@ package htmlIndexer.validators
 
 		public static function isUrl(s:String):Boolean
 		{
-			return RegExpPatterns.URL_WITH_PROTOCOL.test(s);
+			const regExp:RegExp = new RegExp(RegExpPatterns.URL_WITH_PROTOCOL);
+			return regExp.test(s);
 		}
 	}
 }
