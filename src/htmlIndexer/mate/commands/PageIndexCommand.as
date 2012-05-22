@@ -67,6 +67,25 @@ package htmlIndexer.mate.commands
 			return result;
 		}
 
+		private function parseLoadedData():void
+		{
+			if (urlLoader.data && urlLoader.data.toString().length)
+			{
+				const links:Array = parseLinks(
+						urlLoader.data.toString()
+				);
+				const page:PageVO = new PageVO(
+						url,
+						links
+				);
+
+				indexManager.currentPage = page;
+				indexManager.lastLinks = page.links;
+
+				storeToDB(page);
+			}
+		}
+
 		private function addLoaderListeners(dispatcher:EventDispatcher):void
 		{
 			dispatcher.addEventListener(Event.OPEN, urlLoader_openHandler);
@@ -157,21 +176,7 @@ package htmlIndexer.mate.commands
 
 		private function urlLoader_completeHandler(event:Event):void
 		{
-			if (urlLoader.data && urlLoader.data.toString().length)
-			{
-				const links:Array = parseLinks(
-						urlLoader.data.toString()
-				);
-				const page:PageVO = new PageVO(
-						url,
-						links
-				);
-
-				indexManager.currentPage = page;
-				indexManager.lastLinks = page.links;
-
-				storeToDB(page);
-			}
+			parseLoadedData();
 
 			releaseLoaderAndTimer();
 		}
