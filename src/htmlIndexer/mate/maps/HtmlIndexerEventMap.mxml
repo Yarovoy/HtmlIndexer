@@ -10,6 +10,8 @@
 		import htmlIndexer.mate.commands.ExportCsvCommand;
 		import htmlIndexer.mate.commands.IndexManagerCommand;
 		import htmlIndexer.mate.commands.PageIndexCommand;
+		import htmlIndexer.mate.commands.db.DbCloseConnectionCommand;
+		import htmlIndexer.mate.commands.db.DbOpenConnectionCommand;
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]>
 	</fx:Script>
@@ -44,6 +46,14 @@
 
 		<mate:EventHandlers type="{HtmlIndexerEvent.EXPORT_CSV}">
 			<mate:CommandInvoker generator="{ExportCsvCommand}" />
+		</mate:EventHandlers>
+
+		<mate:EventHandlers type="{HtmlIndexerEvent.APPLICATION_CREATED}">
+			<mate:CommandInvoker generator="{DbOpenConnectionCommand}" />
+		</mate:EventHandlers>
+
+		<mate:EventHandlers type="{Event.CLOSING}">
+			<mate:CommandInvoker generator="{DbCloseConnectionCommand}" />
 		</mate:EventHandlers>
 
 	</fx:Declarations>

@@ -17,6 +17,12 @@ package htmlIndexer.mate.commands
 	import htmlIndexer.mate.vos.PageVO;
 	import htmlIndexer.utils.RegExpPatterns;
 
+	import mx.collections.ArrayCollection;
+	import mx.collections.IViewCursor;
+
+	import nz.co.codec.flexorm.EntityManager;
+	import nz.co.codec.flexorm.criteria.Criteria;
+
 	public class PageIndexCommand extends IndexManagerCommand
 	{
 
@@ -123,6 +129,29 @@ package htmlIndexer.mate.commands
 		private function storeToDB(page:PageVO):void
 		{
 
+			const em:EntityManager = EntityManager.instance;
+
+			const criteria:Criteria = em.createCriteria(PageVO);
+			criteria.addEqualsCondition('url', page.url);
+			const result:ArrayCollection = em.fetchCriteria(criteria);
+
+			// Remove old pages with the same URL and their links.
+			const cursor:IViewCursor = result.createCursor();
+			var oldPage:PageVO;
+			while (!cursor.afterLast)
+			{
+				oldPage = cursor.current as PageVO;
+
+				trace('removed page ' + oldPage.url + ' with ' + oldPage.links.length + ' links within.');
+
+				em.remove(oldPage);
+
+				cursor.moveNext();
+			}
+
+			// Save new page in DB.
+			trace('Save new page.');
+			em.save(page);
 		}
 
 		// ----------------------------------------------------------------------

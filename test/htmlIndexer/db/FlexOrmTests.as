@@ -134,7 +134,6 @@ package htmlIndexer.db
 			assertEquals(3, linksResult.length);
 		}
 
-
 		[Test]
 		public function testCascadeRemoving():void
 		{

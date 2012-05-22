@@ -10,6 +10,8 @@ package htmlIndexer.mate.events
 		// Constants
 		// ----------------------------------------------------------------------
 
+		public static const APPLICATION_CREATED:String = 'applicationCreated';
+
 		public static const INDEX_PAGE:String = 'indexPage';
 		public static const EXPORT_CSV:String = 'exportCsv';
 
