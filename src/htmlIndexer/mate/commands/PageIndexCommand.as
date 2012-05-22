@@ -8,6 +8,7 @@ package htmlIndexer.mate.commands
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
+	import flash.filesystem.File;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
@@ -119,6 +120,11 @@ package htmlIndexer.mate.commands
 			releaseLoaderAndTimer();
 		}
 
+		private function storeToDB(page:PageVO):void
+		{
+
+		}
+
 		// ----------------------------------------------------------------------
 		// Public methods
 		// ----------------------------------------------------------------------
@@ -160,6 +166,8 @@ package htmlIndexer.mate.commands
 
 				indexManager.currentPage = page;
 				indexManager.lastLinks = page.links;
+
+				storeToDB(page);
 			}
 
 			releaseLoaderAndTimer();

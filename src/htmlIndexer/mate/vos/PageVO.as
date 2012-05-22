@@ -5,6 +5,8 @@ package htmlIndexer.mate.vos
 
 	import mx.collections.ArrayCollection;
 
+	[Bindable]
+	[Table(name='pages')]
 	public class PageVO extends EventDispatcher
 	{
 
@@ -12,11 +14,13 @@ package htmlIndexer.mate.vos
 		// Public props
 		// ----------------------------------------------------------------------
 
-		[Bindable]
-		public var url:String;
+		[Id]
+		public var id:int;
 
-		[Bindable]
+		[OneToMany(type='htmlIndexer.mate.vos.LinkVO', cascade='all')]
 		public var links:ArrayCollection;
+
+		public var url:String;
 
 		// ----------------------------------------------------------------------
 		// Constructor

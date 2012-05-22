@@ -3,6 +3,8 @@ package htmlIndexer.mate.vos
 
 	import flash.events.EventDispatcher;
 
+	[Bindable]
+	[Table(name='links')]
 	public class LinkVO extends EventDispatcher
 	{
 
@@ -10,10 +12,14 @@ package htmlIndexer.mate.vos
 		// Public props
 		// ----------------------------------------------------------------------
 
-		[Bindable]
+		[Id]
+		public var id:int;
+
+		[ManyToOne]
+		public var page:PageVO;
+
 		public var url:String;
 
-		[Bindable]
 		public var text:String;
 
 		// ----------------------------------------------------------------------
