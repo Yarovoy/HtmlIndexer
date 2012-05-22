@@ -2,17 +2,20 @@ package htmlIndexer.db
 {
 
 	import flash.data.SQLStatement;
+	import flash.events.SQLEvent;
 
 	import htmlIndexer.mate.vos.LinkVO;
-
-	import mx.collections.ArrayCollection;
+	import htmlIndexer.mate.vos.PageVO;
 
 	import nz.co.codec.flexorm.EntityManager;
 
 	import org.flexunit.asserts.assertEquals;
+	import org.flexunit.async.Async;
 
 	public class FlexOrmTests
 	{
+
+		private var em:EntityManager = EntityManager.instance;
 
 		[BeforeClass]
 		public static function initDbConnection():void
@@ -26,42 +29,71 @@ package htmlIndexer.db
 			EntityManager.instance.sqlConnection.close();
 		}
 
-		[After]
+		[After(async)]
 		public function after():void
 		{
 			const sqlStatement:SQLStatement = new SQLStatement();
-			sqlStatement.text = 'DELETE FROM links; DELETE FROM pages;';
-			sqlStatement.sqlConnection =  EntityManager.instance.sqlConnection;
+			sqlStatement.sqlConnection = em.sqlConnection;
+
+			sqlStatement.text = 'DELETE FROM links;';
+			Async.proceedOnEvent(this, sqlStatement, SQLEvent.RESULT);
+			sqlStatement.execute();
+
+			sqlStatement.text = 'DELETE FROM pages;';
+			Async.proceedOnEvent(this, sqlStatement, SQLEvent.RESULT);
 			sqlStatement.execute();
 		}
 
 		[Test]
-		public function testLinkCreating():void
+		public function testLinkCreation():void
 		{
 			const firstLink:LinkVO = new LinkVO('http://ya.ru', 'Яндекс');
-			EntityManager.instance.save(firstLink);
+			em.save(firstLink);
 
-			var result:ArrayCollection =  EntityManager.instance.findAll(LinkVO);
-			assertEquals(1, result.length);
+			assertEquals(1, em.findAll(LinkVO).length);
 
 			const secondLink:LinkVO = new LinkVO('http://yarovoy.com', "Brains'trim");
-			EntityManager.instance.save(secondLink);
+			em.save(secondLink);
 
-			result =  EntityManager.instance.findAll(LinkVO);
-			assertEquals(2, result.length);
+			assertEquals(2, em.findAll(LinkVO).length);
 		}
 
 		[Test]
 		public function testLinkRemoving():void
 		{
 			const link:LinkVO = new LinkVO('http://ya.ru', 'Яндекс');
-			EntityManager.instance.save(link);
+			em.save(link);
 
-			assertEquals(1,  EntityManager.instance.findAll(LinkVO).length);
+			assertEquals(1, em.findAll(LinkVO).length);
 
-			EntityManager.instance.remove(link);
+			em.remove(link);
 
-			assertEquals(0,  EntityManager.instance.findAll(LinkVO).length);
+			assertEquals(0, em.findAll(LinkVO).length);
+		}
+
+		[Test]
+		public function testPageCreation():void
+		{
+			em.save(new PageVO('http://ya.ru'));
+
+			assertEquals(1, em.findAll(PageVO).length);
+
+			em.save(new PageVO('http://yarovoy.com'));
+
+			assertEquals(2, em.findAll(PageVO).length);
+		}
+
+		[Test]
+		public function testPageRemoving():void
+		{
+			const page:PageVO = new PageVO('http://ya.ru');
+			em.save(page);
+
+			assertEquals(1, em.findAll(PageVO).length);
+
+			em.remove(page);
+
+			assertEquals(0, em.findAll(PageVO).length);
 		}
 	}
 }
