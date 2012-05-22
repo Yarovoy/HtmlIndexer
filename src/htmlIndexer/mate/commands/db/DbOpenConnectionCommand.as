@@ -27,7 +27,7 @@ package htmlIndexer.mate.commands.db
 		// Public methods
 		// ----------------------------------------------------------------------
 
-		override public function execute(event:Event):void
+		override public function execute(event:Event = null):void
 		{
 			super.execute(event);
 

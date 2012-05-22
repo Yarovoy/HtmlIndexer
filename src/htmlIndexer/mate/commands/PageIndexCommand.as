@@ -8,20 +8,14 @@ package htmlIndexer.mate.commands
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
-	import flash.filesystem.File;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
 
+	import htmlIndexer.mate.commands.db.DbPageStoreCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 	import htmlIndexer.mate.vos.PageVO;
 	import htmlIndexer.utils.RegExpPatterns;
-
-	import mx.collections.ArrayCollection;
-	import mx.collections.IViewCursor;
-
-	import nz.co.codec.flexorm.EntityManager;
-	import nz.co.codec.flexorm.criteria.Criteria;
 
 	public class PageIndexCommand extends IndexManagerCommand
 	{
@@ -32,6 +26,7 @@ package htmlIndexer.mate.commands
 		// Private props
 		// ----------------------------------------------------------------------
 
+		private var timer:Timer;
 		private var urlLoader:URLLoader;
 
 		// ----------------------------------------------------------------------
@@ -39,7 +34,8 @@ package htmlIndexer.mate.commands
 		// ----------------------------------------------------------------------
 
 		public var url:String;
-		private var timer:Timer;
+
+		public var dbPageStoreCommand:DbPageStoreCommand;
 
 		// ----------------------------------------------------------------------
 		// Constructor
@@ -128,37 +124,15 @@ package htmlIndexer.mate.commands
 
 		private function storeToDB(page:PageVO):void
 		{
-
-			const em:EntityManager = EntityManager.instance;
-
-			const criteria:Criteria = em.createCriteria(PageVO);
-			criteria.addEqualsCondition('url', page.url);
-			const result:ArrayCollection = em.fetchCriteria(criteria);
-
-			// Remove old pages with the same URL and their links.
-			const cursor:IViewCursor = result.createCursor();
-			var oldPage:PageVO;
-			while (!cursor.afterLast)
-			{
-				oldPage = cursor.current as PageVO;
-
-				trace('removed page ' + oldPage.url + ' with ' + oldPage.links.length + ' links within.');
-
-				em.remove(oldPage);
-
-				cursor.moveNext();
-			}
-
-			// Save new page in DB.
-			trace('Save new page.');
-			em.save(page);
+			dbPageStoreCommand.page = page;
+			dbPageStoreCommand.execute();
 		}
 
 		// ----------------------------------------------------------------------
 		// Public methods
 		// ----------------------------------------------------------------------
 
-		override public function execute(event:Event):void
+		override public function execute(event:Event = null):void
 		{
 			super.execute(event);
 

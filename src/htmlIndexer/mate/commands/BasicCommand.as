@@ -19,7 +19,7 @@ package htmlIndexer.mate.commands
 		// Public methods
 		// ----------------------------------------------------------------------
 
-		public function execute(event:Event):void
+		public function execute(event:Event = null):void
 		{
 		}
 	}

@@ -12,6 +12,7 @@
 		import htmlIndexer.mate.commands.PageIndexCommand;
 		import htmlIndexer.mate.commands.db.DbCloseConnectionCommand;
 		import htmlIndexer.mate.commands.db.DbOpenConnectionCommand;
+		import htmlIndexer.mate.commands.db.DbPageStoreCommand;
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]>
 	</fx:Script>
@@ -26,6 +27,7 @@
 
 		<mate:Injectors target="{IndexManagerCommand}" includeDerivatives="true">
 			<mate:PropertyInjector targetKey="indexManager" source="{IndexManager}" />
+			<mate:PropertyInjector targetKey="dbPageStoreCommand" source="{DbPageStoreCommand}" />
 		</mate:Injectors>
 
 		<mate:Injectors target="HtmlIndexer">
