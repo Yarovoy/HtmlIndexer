@@ -108,17 +108,17 @@ package ru.riafactory.data.csv
 			);
 		}
 
-		/*[Test]
-		 public function getHeaderLine():void
-		 {
-		 csv.header = ['', '', ''];
-		 assertEquals(',,', csv.headerLine);
+		[Test]
+		public function getHeaderLine():void
+		{
+			csv.header = ['', '', ''];
+			assertEquals(',,', csv.headerLine);
 
-		 csv.header = ['Name', 'Value', 'Date'];
-		 assertEquals('Name,Value,Date', csv.headerLine);
+			csv.header = ['Name', 'Value', 'Date'];
+			assertEquals('Name,Value,Date', csv.headerLine);
 
-		 csv.header = ['Link', 'Text', 'Page "URL"'];
-		 assertEquals('Link,Text,Page ""URL""', csv.headerLine);
-		 }*/
+			csv.header = ['Link', 'Text', 'Page "URL"'];
+			assertEquals('Link,Text,"Page ""URL"""', csv.headerLine);
+		}
 	}
 }
