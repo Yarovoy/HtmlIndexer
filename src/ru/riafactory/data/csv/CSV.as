@@ -3,6 +3,8 @@ package ru.riafactory.data.csv
 
 	import ru.riafactory.core.riafactory_internal;
 
+	use namespace riafactory_internal;
+
 	/**
 	 * Class for exporting (and importing in future) data to the comma separated values format CSV.
 	 * See http://tools.ietf.org/html/rfc4180 for more information about that format.
@@ -14,7 +16,7 @@ package ru.riafactory.data.csv
 		// Constants
 		// ----------------------------------------------------------------------
 
-		private static const ENCLOSURE_CHECKER:RegExp = /[",]|(?:\r\n)/g;
+		private static const ENCLOSURE_CHECKER:RegExp = /[",\r\n]/g;
 		private static const DELIMITER:String = ",";
 		private static const BREAK:String = '\r\n';
 
@@ -36,29 +38,26 @@ package ru.riafactory.data.csv
 		// Internal methods
 		// ----------------------------------------------------------------------
 
-		riafactory_internal static function escapeRecordString(recordStr:String):String
+		riafactory_internal static function escapeRecordString(str:String):String
 		{
-			if (recordStr == null)
+			if (str == null)
 			{
 				return null;
 			}
 
-			ENCLOSURE_CHECKER.lastIndex = 0;
-
-			var escapedStr:String = recordStr.replace(/"/g, '""');
-
-			var encloseByQuotes:Boolean = ENCLOSURE_CHECKER.test(escapedStr);
-
 			// Enclose by double quotes if need.
-			if (encloseByQuotes)
+			ENCLOSURE_CHECKER.lastIndex = 0;
+			if (ENCLOSURE_CHECKER.test(str))
 			{
-				escapedStr = '"' + escapedStr + '"';
+				str = str.replace(/"/g, '""');
+
+				return '"' + str + '"';
 			}
 
-			return escapedStr;
+			return str;
 		}
 
-		riafactory_internal static function recordString(record:*):String
+		riafactory_internal static function recordToString(record:*):String
 		{
 			if (!record)
 			{
@@ -75,7 +74,26 @@ package ru.riafactory.data.csv
 				recordStr = record.toString();
 			}
 
-			return recordStr;
+			return escapeRecordString(recordStr);
+		}
+
+		riafactory_internal static function joinRecordSet(recordSet:Array):String
+		{
+			if (!recordSet)
+			{
+				return null;
+			}
+
+			const escapedSet:Array = [];
+
+			for each(var record:* in recordSet)
+			{
+				escapedSet.push(
+						recordToString(record)
+				);
+			}
+
+			return escapedSet.join(DELIMITER);
 		}
 
 		riafactory_internal function get headerLine():String
@@ -85,7 +103,7 @@ package ru.riafactory.data.csv
 				return null;
 			}
 
-			return header.join(DELIMITER);
+			return joinRecordSet(header);
 		}
 
 		// ----------------------------------------------------------------------

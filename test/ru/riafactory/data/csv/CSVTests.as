@@ -1,6 +1,7 @@
 package ru.riafactory.data.csv
 {
 
+
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNull;
 
@@ -18,7 +19,7 @@ package ru.riafactory.data.csv
 		// Syntax.
 		// 3. Spaces are considered part of a field and should not be ignored. [-]
 		// 4. The last field in the record must not be followed by a comma. [-]
-		// 5. Fields containing line breaks (CRLF), double quotes, and commas should be enclosed in double-quotes. [-]
+		// 5. Fields containing line breaks (CRLF), double quotes, and commas should be enclosed in double-quotes. [+]
 
 		// ----------------------------------------------------------------------
 		// Private props
@@ -74,26 +75,50 @@ package ru.riafactory.data.csv
 			assertEquals('', CSV.escapeRecordString(''));
 		}
 
+		[Test]
+		public function testRecordToString():void
+		{
+			assertEquals('', CSV.recordToString(null));
+
+			assertEquals('Thu Jan 1 00:00:00 1970 UTC', CSV.recordToString(new Date(0)));
+		}
+
+		[Test]
+		public function testJoinRecordSet():void
+		{
+			assertNull(CSV.joinRecordSet(null));
+
+			assertEquals(',,', CSV.joinRecordSet(['', '', '']));
+
+			assertEquals('Name,Value', CSV.joinRecordSet(['Name', 'Value']));
+
+			assertEquals(
+					'Name of record,Value of record',
+					CSV.joinRecordSet(['Name of record', 'Value of record'])
+			);
+
+			assertEquals(
+					'"Record, with comma",Value',
+					CSV.joinRecordSet(['Record, with comma', 'Value'])
+			);
+
+			assertEquals(
+					'"Record with double "" quote",Value',
+					CSV.joinRecordSet(['Record with double " quote', 'Value'])
+			);
+		}
+
 		/*[Test]
-		 public function testRecordString():void
-		 {
-		 assertEquals('', CSV.recordString(null));
-
-		 assertEquals('Thu Jan 1 00:00:00 1970 UTC', CSV.recordString(new Date(0)));
-		 }*/
-
-		/*
-
-		 [Test]
 		 public function getHeaderLine():void
 		 {
-		 csv.header = ['Name', 'Value', 'Date'];
+		 csv.header = ['', '', ''];
+		 assertEquals(',,', csv.headerLine);
 
+		 csv.header = ['Name', 'Value', 'Date'];
 		 assertEquals('Name,Value,Date', csv.headerLine);
 
-		 csv.header = ['Link', 'Text', 'Page'];
-
-		 assertEquals('Link,Text,Page', csv.headerLine);
+		 csv.header = ['Link', 'Text', 'Page "URL"'];
+		 assertEquals('Link,Text,Page ""URL""', csv.headerLine);
 		 }*/
 	}
 }
