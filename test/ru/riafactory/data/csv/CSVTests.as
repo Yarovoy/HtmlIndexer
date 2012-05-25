@@ -17,8 +17,8 @@ package ru.riafactory.data.csv
 		// 1. Within the header and each record, there may be one or more fields, separated by commas. [-]
 		// 2. Each line should contain the same number of fields throughout the file. [-]
 		// Syntax.
-		// 3. Spaces are considered part of a field and should not be ignored. [-]
-		// 4. The last field in the record must not be followed by a comma. [-]
+		// 3. Spaces are considered part of a field and should not be ignored. [+]
+		// 4. The last field in the record must not be followed by a comma. [+]
 		// 5. Fields containing line breaks (CRLF), double quotes, and commas should be enclosed in double-quotes. [+]
 
 		// ----------------------------------------------------------------------
@@ -119,6 +119,117 @@ package ru.riafactory.data.csv
 
 			csv.header = ['Link', 'Text', 'Page "URL"'];
 			assertEquals('Link,Text,"Page ""URL"""', csv.headerLine);
+		}
+
+		[Test]
+		public function testGetRecordSetAt():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+			csv.addRecordSet(['Name 2', 'Value 2']);
+
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 2', csv.getRecordSetAt(1)[1]);
+		}
+
+		[Test]
+		public function testSetRecordSetAt():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+
+			csv.setRecordSetAt(['Name 2', 'Value 2'], 0);
+
+			assertEquals('Name 2', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 2', csv.getRecordSetAt(0)[1]);
+		}
+
+		[Test(expects="RangeError")]
+		public function testSetRecordSetAtError():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 1', csv.getRecordSetAt(0)[1]);
+
+			csv.setRecordSetAt(['Name 2', 'Value 2'], 1);
+		}
+
+		[Test]
+		public function testAddRecordSet():void
+		{
+			assertEquals(0, csv.length);
+
+			csv.addRecordSet(['Name', 'Value']);
+
+			assertEquals(1, csv.length);
+		}
+
+		[Test]
+		public function testAddRecordSetAt():void
+		{
+			csv.addRecordSetAt(['Name 1', 'Value 1'], 0);
+
+			assertEquals(1, csv.length);
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+
+			csv.addRecordSetAt(['Name 2', 'Value 2'], 0);
+
+			assertEquals(2, csv.length);
+			assertEquals('Name 2', csv.getRecordSetAt(0)[0]);
+		}
+
+		[Test(expects="RangeError")]
+		public function testAddRecordSetAtError():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 1', csv.getRecordSetAt(0)[1]);
+
+			csv.addRecordSetAt(['Name 2', 'Value 2'], 2);
+		}
+
+
+		[Test]
+		public function testRemoveRecordSetAt():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+			csv.addRecordSet(['Name 2', 'Value 2']);
+
+			assertEquals(2, csv.length);
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 1', csv.getRecordSetAt(0)[1]);
+
+			csv.removeRecordSetAt(0);
+
+			assertEquals(1, csv.length);
+			assertEquals('Name 2', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 2', csv.getRecordSetAt(0)[1]);
+		}
+
+		[Test(expects="RangeError")]
+		public function testRemoveRecordSetAtError():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+
+			assertEquals('Name 1', csv.getRecordSetAt(0)[0]);
+			assertEquals('Value 1', csv.getRecordSetAt(0)[1]);
+
+			csv.removeRecordSetAt(1);
+		}
+
+		[Test]
+		public function testRemoveAllRecordSets():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+			csv.addRecordSet(['Name 2', 'Value 2']);
+
+			assertEquals(2, csv.length);
+
+			csv.removeAllRecordSets();
+
+			assertEquals(0, csv.length);
 		}
 	}
 }

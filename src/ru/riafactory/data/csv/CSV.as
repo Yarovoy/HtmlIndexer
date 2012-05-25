@@ -7,7 +7,7 @@ package ru.riafactory.data.csv
 
 	/**
 	 * Class for exporting (and importing in future) data to the comma separated values format CSV.
-	 * See http://tools.ietf.org/html/rfc4180 for more information about that format.
+	 * See http://tools.ietf.org/html/rfc4180 for more information about CSV format.
 	 */
 	public class CSV
 	{
@@ -21,10 +21,25 @@ package ru.riafactory.data.csv
 		private static const BREAK:String = '\r\n';
 
 		// ----------------------------------------------------------------------
+		// Private props
+		// ----------------------------------------------------------------------
+
+		private var recordSets:Array = [];
+
+		// ----------------------------------------------------------------------
 		// Public props
 		// ----------------------------------------------------------------------
 
 		public var header:Array;
+
+		// ----------------------------------------------------------------------
+		// Getters and setters
+		// ----------------------------------------------------------------------
+
+		public function get length():Number
+		{
+			return recordSets.length;
+		}
 
 		// ----------------------------------------------------------------------
 		// Constructor
@@ -110,13 +125,56 @@ package ru.riafactory.data.csv
 		// Public methods
 		// ----------------------------------------------------------------------
 
+		public function getRecordSetAt(index:int):Array
+		{
+			return recordSets[index];
+		}
+
+		public function setRecordSetAt(recordSet:Array, index:int):void
+		{
+			if (index < 0 || index >= length)
+			{
+				throw new RangeError('Index is out of bounds: ' + index + '.');
+			}
+
+			recordSets[index] = recordSet;
+		}
+
 		public function addRecordSet(recordSet:Array):void
 		{
+			recordSets.push(recordSet);
+		}
+
+		public function addRecordSetAt(recordSet:Array, index:int):void
+		{
+			if (index < 0 || index > length)
+			{
+				throw new RangeError('Index is out of bounds: ' + index + '.');
+			}
+
+			recordSets.splice(index, 0, recordSet);
+		}
+
+		public function removeRecordSetAt(index:int):Array
+		{
+			if (index < 0 || index >= length)
+			{
+				throw new RangeError('Index is out of bounds: ' + index + '.');
+			}
+
+			return recordSets.splice(index, 1)[0];
+		}
+
+		public function removeAllRecordSets():void
+		{
+			recordSets = [];
 		}
 
 		public function toCSVString():String
 		{
-			return null;
+			var result:String = header ? headerLine + BREAK : '';
+
+			return result;
 		}
 	}
 }
