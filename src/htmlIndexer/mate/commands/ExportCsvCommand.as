@@ -1,8 +1,6 @@
 package htmlIndexer.mate.commands
 {
 
-	import com.shortybmc.data.parser.CSV;
-
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
@@ -13,6 +11,8 @@ package htmlIndexer.mate.commands
 
 	import mx.collections.ArrayCollection;
 	import mx.collections.IViewCursor;
+
+	import ru.riafactory.data.csv.CSV;
 
 	public class ExportCsvCommand extends DbCommand
 	{
@@ -60,7 +60,6 @@ package htmlIndexer.mate.commands
 		private function file_selectHandler(event:Event):void
 		{
 			const csv:CSV = new CSV();
-			csv.embededHeader = false;
 			csv.header = ['URL', 'Text', 'From Page'];
 
 			var linkVO:LinkVO;
@@ -74,11 +73,9 @@ package htmlIndexer.mate.commands
 				cursor.moveNext();
 			}
 
-			csv.encode();
-
 			const fileStream:FileStream = new FileStream();
 			fileStream.open(file, FileMode.WRITE);
-			fileStream.writeUTFBytes(csv.data);
+			fileStream.writeUTFBytes(csv.toCSVString());
 			fileStream.close();
 		}
 	}
