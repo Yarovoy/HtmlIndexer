@@ -1,0 +1,6 @@
+# Flex SDK location.
+FLEX_HOME=/usr/share/flex/flex-sdk-4.5
+
+# Relative paths to JARs.
+FLEX_TASKS=${FLEX_HOME}/ant/lib/flexTasks.jar
+ADT=${FLEX_HOME}/lib/adt.jar
