@@ -174,7 +174,14 @@ package ru.riafactory.data.csv
 		{
 			var result:String = header ? headerLine + BREAK : '';
 
-			return result;
+			const escapedRecordSet:Array = [];
+
+			for each(var recordSet:Array in recordSets)
+			{
+				escapedRecordSet.push(joinRecordSet(recordSet));
+			}
+
+			return result + escapedRecordSet.join(BREAK);
 		}
 	}
 }

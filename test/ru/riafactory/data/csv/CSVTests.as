@@ -190,7 +190,6 @@ package ru.riafactory.data.csv
 			csv.addRecordSetAt(['Name 2', 'Value 2'], 2);
 		}
 
-
 		[Test]
 		public function testRemoveRecordSetAt():void
 		{
@@ -230,6 +229,23 @@ package ru.riafactory.data.csv
 			csv.removeAllRecordSets();
 
 			assertEquals(0, csv.length);
+		}
+
+		[Test]
+		public function testToCSVString():void
+		{
+			csv.addRecordSet(['Name 1', 'Value 1']);
+			csv.addRecordSet(['Name 2', 'Value 2']);
+
+			assertEquals('Name 1,Value 1\r\nName 2,Value 2', csv.toCSVString());
+
+			csv.header = ['Title 1', 'Title 2'];
+
+			assertEquals('Title 1,Title 2\r\nName 1,Value 1\r\nName 2,Value 2', csv.toCSVString());
+
+			csv.header = null;
+			csv.setRecordSetAt(['Name "1"', 'Value 1'], 0);
+			assertEquals('"Name ""1""",Value 1\r\nName 2,Value 2', csv.toCSVString());
 		}
 	}
 }
