@@ -2,7 +2,7 @@
 <application xmlns="http://ns.adobe.com/air/application/2.6">
 
 	<id>ru.yandex.HtmlIndexer</id>
-	<versionNumber>1.0.0</versionNumber>
+	<versionNumber>1.2</versionNumber>
 	<filename>Html Indexer</filename>
 	<name>Html Indexer</name>
 

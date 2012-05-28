@@ -65,7 +65,7 @@
 			<arg value="${KEY_STORE}" />
 			<arg value="-storepass" />
 			<arg value="${CERT_PASSWORD}" />
-			<arg value="${RELEASE_DIR}/${APP_NAME}.air" />
+			<arg value="${RELEASE_DIR}/${APP_NAME} ${APP_VERSION}.air" />
 			<arg value="${basedir}/${APP_NAME}-app.xml" />
 			<arg value="-C" />
 			<arg value="${BUILD_DIR}" />
