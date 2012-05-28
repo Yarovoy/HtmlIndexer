@@ -29,8 +29,12 @@
 			<mate:PropertyInjector targetKey="indexManager" source="{IndexManager}" />
 		</mate:Injectors>
 
-		<mate:Injectors target="{PageIndexCommand}" includeDerivatives="true">
+		<mate:Injectors target="{PageIndexCommand}">
 			<mate:PropertyInjector targetKey="dbPageStoreCommand" source="{DbPageStoreCommand}" />
+		</mate:Injectors>
+
+		<mate:Injectors target="{ExportCsvCommand}">
+			<mate:PropertyInjector targetKey="indexManager" source="{IndexManager}" />
 		</mate:Injectors>
 
 		<mate:Injectors target="HtmlIndexer">

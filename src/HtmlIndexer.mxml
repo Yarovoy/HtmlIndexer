@@ -4,7 +4,7 @@
                        xmlns:maps="htmlIndexer.mate.maps.*"
                        xmlns:validators="htmlIndexer.validators.*"
                        status.indexing="Indexing page…"
-
+                       status.exporting="Exporting data to CSV…"
                        creationComplete="creationCompleteHandler(event)">
 	<fx:Script><![CDATA[
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
@@ -53,55 +53,59 @@
 	</fx:Declarations>
 
 	<s:states>
-		<s:State name="base" />
-		<s:State name="indexing" />
+		<s:State name="base" stateGroups="baseGroup" />
+		<s:State name="indexing" stateGroups="actionGroup" />
+		<s:State name="exporting" stateGroups="actionGroup" />
 	</s:states>
 
-	<s:layout>
-		<s:VerticalLayout
-				paddingTop="20" paddingLeft="20"
-				paddingBottom="20" paddingRight="20"
-				gap="20" />
-	</s:layout>
+	<s:Group id="appContentGroup"
+	         width="100%" height="100%"
+	         enabled.actionGroup="false">
 
-	<s:HGroup width="100%">
-		<s:Label text="URL:"
-		         fontSize="24" />
+		<s:layout>
+			<s:VerticalLayout
+					paddingTop="20" paddingLeft="20"
+					paddingBottom="20" paddingRight="20"
+					gap="20" />
+		</s:layout>
 
-		<s:TextInput id="urlTextInput"
-		             width="100%"
-		             text="http://ya.ru"
-		             prompt="Enter an URL…"
-		             enabled.indexing="false"
-		             enter="validateUrlAndDispatchIndexPageEvent();" />
+		<s:HGroup width="100%">
+			<s:Label text="URL:"
+			         fontSize="24" />
 
-		<s:Button id="indexingButton"
-		          label="OK"
-		          enabled.indexing="false"
-		          click="validateUrlAndDispatchIndexPageEvent();" />
-	</s:HGroup>
+			<s:TextInput id="urlTextInput"
+			             width="100%"
+			             text="http://ya.ru"
+			             prompt="Enter an URL…"
+			             enter="validateUrlAndDispatchIndexPageEvent();" />
 
-	<s:DataGrid id="linksDataGrid"
-	            dataProvider="{linksList}"
-	            width="100%" height="100%"
-	            alternatingRowColors="[#FFFFFF, #EEEEEE]">
-		<s:columns>
-			<s:ArrayList>
-				<s:GridColumn dataField="text" headerText="Text" />
-				<s:GridColumn dataField="url" headerText="URL" />
-			</s:ArrayList>
-		</s:columns>
-		<s:typicalItem>
-			<s:DataItem text="Войти&amp;nbsp;в&amp;nbsp;почту" url="http://mail.yandex.ru" />
-		</s:typicalItem>
-	</s:DataGrid>
+			<s:Button id="indexingButton"
+			          label="OK"
+			          click="validateUrlAndDispatchIndexPageEvent();" />
+		</s:HGroup>
 
-	<s:Group width="100%">
-		<s:Button id="exportCsvButton"
-		          label="Export to CSV"
-		          right="0" bottom="0"
-		          enabled.indexing="false"
-		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.EXPORT_CSV))" />
+		<s:DataGrid id="linksDataGrid"
+		            dataProvider="{linksList}"
+		            width="100%" height="100%"
+		            alternatingRowColors="[#FFFFFF, #EEEEEE]">
+			<s:columns>
+				<s:ArrayList>
+					<s:GridColumn dataField="text" headerText="Text" />
+					<s:GridColumn dataField="url" headerText="URL" />
+				</s:ArrayList>
+			</s:columns>
+			<s:typicalItem>
+				<s:DataItem text="Войти&amp;nbsp;в&amp;nbsp;почту" url="http://mail.yandex.ru" />
+			</s:typicalItem>
+		</s:DataGrid>
+
+		<s:Group width="100%">
+			<s:Button id="exportCsvButton"
+			          label="Export to CSV"
+			          right="0" bottom="0"
+			          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.EXPORT_CSV))" />
+		</s:Group>
 	</s:Group>
+
 
 </s:WindowedApplication>

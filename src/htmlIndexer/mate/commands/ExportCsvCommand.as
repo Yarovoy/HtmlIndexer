@@ -6,6 +6,8 @@ package htmlIndexer.mate.commands
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 
+	import htmlIndexer.mate.business.IndexManager;
+	import htmlIndexer.mate.business.IndexManagerState;
 	import htmlIndexer.mate.commands.db.DbCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 
@@ -23,13 +25,17 @@ package htmlIndexer.mate.commands
 
 		private static const DEFAULT_FILE_NAME:String = 'links.csv';
 
-		private static const DELIMITER:String = ",";
-
 		// ----------------------------------------------------------------------
 		// Private props
 		// ----------------------------------------------------------------------
 
 		private var file:File;
+
+		// ----------------------------------------------------------------------
+		// Public props
+		// ----------------------------------------------------------------------
+
+		public var indexManager:IndexManager;
 
 		// ----------------------------------------------------------------------
 		// Constructor
@@ -48,8 +54,11 @@ package htmlIndexer.mate.commands
 		{
 			super.execute(event);
 
+			indexManager.currentState = IndexManagerState.EXPORTING;
+
 			file = File.documentsDirectory.resolvePath(DEFAULT_FILE_NAME);
 			file.addEventListener(Event.SELECT, file_selectHandler);
+			file.addEventListener(Event.CANCEL, file_cancelHandler);
 			file.browseForSave('Save File');
 		}
 
@@ -77,6 +86,13 @@ package htmlIndexer.mate.commands
 			fileStream.open(file, FileMode.WRITE);
 			fileStream.writeUTFBytes(csv.toCSVString());
 			fileStream.close();
+
+			indexManager.currentState = IndexManagerState.BASE;
+		}
+
+		private function file_cancelHandler(event:Event):void
+		{
+			indexManager.currentState = IndexManagerState.BASE;
 		}
 	}
 }
