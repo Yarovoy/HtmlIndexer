@@ -1,4 +1,4 @@
-package htmlIndexer.utils
+package htmlIndexer.regExp
 {
 
 	public class RegExpPatterns

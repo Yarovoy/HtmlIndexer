@@ -1,7 +1,7 @@
 package htmlIndexer.validators
 {
 
-	import htmlIndexer.utils.RegExpPatterns;
+	import htmlIndexer.regExp.RegExpPatterns;
 
 	import mx.validators.ValidationResult;
 	import mx.validators.Validator;

@@ -7,7 +7,7 @@ package htmlIndexer.mate.business
 
 	import mx.collections.ArrayCollection;
 
-	public class IndexManager extends EventDispatcher
+	public class HtmlIndexerModel extends EventDispatcher
 	{
 
 		// ----------------------------------------------------------------------
@@ -15,24 +15,20 @@ package htmlIndexer.mate.business
 		// ----------------------------------------------------------------------
 
 		[Bindable]
-		public var pages:ArrayCollection;
-
-		[Bindable]
 		public var currentState:String;
 
 		[Bindable]
-		public var currentPage:PageVO;
+		public var lastIndexedPage:PageVO;
 
 		[Bindable]
-		public var lastLinks:ArrayCollection;
+		public var lastIndexedLinks:ArrayCollection;
 
 		// ----------------------------------------------------------------------
 		// Constructor
 		// ----------------------------------------------------------------------
 
-		public function IndexManager()
+		public function HtmlIndexerModel()
 		{
-			pages = new ArrayCollection();
 		}
 	}
 }

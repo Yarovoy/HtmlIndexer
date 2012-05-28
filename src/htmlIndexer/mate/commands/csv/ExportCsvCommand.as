@@ -1,4 +1,4 @@
-package htmlIndexer.mate.commands
+package htmlIndexer.mate.commands.csv
 {
 
 	import flash.events.Event;
@@ -6,8 +6,8 @@ package htmlIndexer.mate.commands
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 
-	import htmlIndexer.mate.business.IndexManager;
-	import htmlIndexer.mate.business.IndexManagerState;
+	import htmlIndexer.mate.business.HtmlIndexerModel;
+	import htmlIndexer.states.HtmlIndexerState;
 	import htmlIndexer.mate.commands.db.DbCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 
@@ -35,7 +35,7 @@ package htmlIndexer.mate.commands
 		// Public props
 		// ----------------------------------------------------------------------
 
-		public var indexManager:IndexManager;
+		public var htmlIndexerModel:HtmlIndexerModel;
 
 		// ----------------------------------------------------------------------
 		// Constructor
@@ -54,7 +54,7 @@ package htmlIndexer.mate.commands
 		{
 			super.execute(event);
 
-			indexManager.currentState = IndexManagerState.EXPORTING;
+			htmlIndexerModel.currentState = HtmlIndexerState.EXPORTING;
 
 			file = File.documentsDirectory.resolvePath(DEFAULT_FILE_NAME);
 			file.addEventListener(Event.SELECT, file_selectHandler);
@@ -87,12 +87,12 @@ package htmlIndexer.mate.commands
 			fileStream.writeUTFBytes(csv.toCSVString());
 			fileStream.close();
 
-			indexManager.currentState = IndexManagerState.BASE;
+			htmlIndexerModel.currentState = HtmlIndexerState.BASE;
 		}
 
 		private function file_cancelHandler(event:Event):void
 		{
-			indexManager.currentState = IndexManagerState.BASE;
+			htmlIndexerModel.currentState = HtmlIndexerState.BASE;
 		}
 	}
 }

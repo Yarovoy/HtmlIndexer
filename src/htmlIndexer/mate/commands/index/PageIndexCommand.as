@@ -1,5 +1,7 @@
-package htmlIndexer.mate.commands
+package htmlIndexer.mate.commands.index
 {
+
+	import htmlIndexer.mate.commands.*;
 
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -12,13 +14,14 @@ package htmlIndexer.mate.commands
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
 
-	import htmlIndexer.mate.business.IndexManagerState;
+	import htmlIndexer.mate.business.HtmlIndexerModel;
+	import htmlIndexer.states.HtmlIndexerState;
 	import htmlIndexer.mate.commands.db.DbPageStoreCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 	import htmlIndexer.mate.vos.PageVO;
-	import htmlIndexer.utils.RegExpPatterns;
+	import htmlIndexer.regExp.RegExpPatterns;
 
-	public class PageIndexCommand extends IndexManagerCommand
+	public class PageIndexCommand extends BasicCommand
 	{
 
 		public static const TIMEOUT_DELAY:int = 30000;
@@ -34,9 +37,11 @@ package htmlIndexer.mate.commands
 		// Public props
 		// ----------------------------------------------------------------------
 
-		public var url:String;
+		public var htmlIndexerModel:HtmlIndexerModel;
 
 		public var dbPageStoreCommand:DbPageStoreCommand;
+
+		public var url:String;
 
 		// ----------------------------------------------------------------------
 		// Constructor
@@ -80,8 +85,8 @@ package htmlIndexer.mate.commands
 						links
 				);
 
-				indexManager.currentPage = page;
-				indexManager.lastLinks = page.links;
+				htmlIndexerModel.lastIndexedPage = page;
+				htmlIndexerModel.lastIndexedLinks = page.links;
 
 				storeToDB(page);
 			}
@@ -109,7 +114,7 @@ package htmlIndexer.mate.commands
 
 		private function loadPage():void
 		{
-			indexManager.currentState = IndexManagerState.INDEXING;
+			htmlIndexerModel.currentState = HtmlIndexerState.INDEXING;
 
 			urlLoader = new URLLoader();
 			addLoaderListeners(urlLoader);
@@ -129,7 +134,7 @@ package htmlIndexer.mate.commands
 			timer.stop();
 			timer = null;
 
-			indexManager.currentState = IndexManagerState.BASE;
+			htmlIndexerModel.currentState = HtmlIndexerState.BASE;
 		}
 
 		private function stopPageLoading():void

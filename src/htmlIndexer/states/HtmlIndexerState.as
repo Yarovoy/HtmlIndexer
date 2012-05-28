@@ -1,7 +1,7 @@
-package htmlIndexer.mate.business
+package htmlIndexer.states
 {
 
-	public class IndexManagerState
+	public class HtmlIndexerState
 	{
 		public static const BASE:String = 'base';
 		public static const INDEXING:String = 'indexing';

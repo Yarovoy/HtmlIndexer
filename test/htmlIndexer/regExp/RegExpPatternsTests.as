@@ -1,4 +1,4 @@
-package htmlIndexer.utils
+package htmlIndexer.regExp
 {
 
 	import org.flexunit.asserts.assertEquals;
