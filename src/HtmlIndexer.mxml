@@ -3,6 +3,8 @@
                        xmlns:s="library://ns.adobe.com/flex/spark"
                        xmlns:maps="htmlIndexer.mate.maps.*"
                        xmlns:validators="htmlIndexer.validators.*"
+                       status.indexing="Indexing page…"
+
                        creationComplete="creationCompleteHandler(event)">
 	<fx:Script><![CDATA[
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
@@ -50,6 +52,11 @@
 		                         triggerEvent="" />
 	</fx:Declarations>
 
+	<s:states>
+		<s:State name="base" />
+		<s:State name="indexing" />
+	</s:states>
+
 	<s:layout>
 		<s:VerticalLayout
 				paddingTop="20" paddingLeft="20"
@@ -65,10 +72,12 @@
 		             width="100%"
 		             text="http://ya.ru"
 		             prompt="Enter an URL…"
+		             enabled.indexing="false"
 		             enter="validateUrlAndDispatchIndexPageEvent();" />
 
 		<s:Button id="indexingButton"
 		          label="OK"
+		          enabled.indexing="false"
 		          click="validateUrlAndDispatchIndexPageEvent();" />
 	</s:HGroup>
 
@@ -91,6 +100,7 @@
 		<s:Button id="exportCsvButton"
 		          label="Export to CSV"
 		          right="0" bottom="0"
+		          enabled.indexing="false"
 		          click="dispatchEvent(new HtmlIndexerEvent(HtmlIndexerEvent.EXPORT_CSV))" />
 	</s:Group>
 

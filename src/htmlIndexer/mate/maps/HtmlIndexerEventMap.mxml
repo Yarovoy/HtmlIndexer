@@ -37,6 +37,9 @@
 			<mate:PropertyInjector
 					source="{IndexManager}" sourceKey="lastLinks"
 					targetKey="linksList" />
+			<mate:PropertyInjector
+					source="{IndexManager}" sourceKey="currentState"
+					targetKey="currentState" />
 		</mate:Injectors>
 
 		<!-- ====================================================================== -->

@@ -12,6 +12,7 @@ package htmlIndexer.mate.commands
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
 
+	import htmlIndexer.mate.business.IndexManagerState;
 	import htmlIndexer.mate.commands.db.DbPageStoreCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 	import htmlIndexer.mate.vos.PageVO;
@@ -108,6 +109,8 @@ package htmlIndexer.mate.commands
 
 		private function loadPage():void
 		{
+			indexManager.currentState = IndexManagerState.INDEXING;
+
 			urlLoader = new URLLoader();
 			addLoaderListeners(urlLoader);
 			urlLoader.load(new URLRequest(url));
@@ -125,6 +128,8 @@ package htmlIndexer.mate.commands
 			timer.removeEventListener(TimerEvent.TIMER_COMPLETE, timer_timerCompleteHandler);
 			timer.stop();
 			timer = null;
+
+			indexManager.currentState = IndexManagerState.BASE;
 		}
 
 		private function stopPageLoading():void

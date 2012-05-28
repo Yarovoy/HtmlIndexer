@@ -18,7 +18,7 @@ package htmlIndexer.mate.business
 		public var pages:ArrayCollection;
 
 		[Bindable]
-		public var state:String;
+		public var currentState:String;
 
 		[Bindable]
 		public var currentPage:PageVO;
