@@ -1,8 +1,6 @@
 package htmlIndexer.mate.commands.index
 {
 
-	import htmlIndexer.mate.commands.*;
-
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.HTTPStatusEvent;
@@ -15,11 +13,12 @@ package htmlIndexer.mate.commands.index
 	import flash.utils.Timer;
 
 	import htmlIndexer.mate.business.HtmlIndexerModel;
-	import htmlIndexer.states.HtmlIndexerState;
+	import htmlIndexer.mate.commands.*;
 	import htmlIndexer.mate.commands.db.DbPageStoreCommand;
 	import htmlIndexer.mate.vos.LinkVO;
 	import htmlIndexer.mate.vos.PageVO;
 	import htmlIndexer.regExp.RegExpPatterns;
+	import htmlIndexer.states.HtmlIndexerState;
 
 	public class PageIndexCommand extends BasicCommand
 	{

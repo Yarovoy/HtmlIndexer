@@ -1,9 +1,9 @@
 package htmlIndexer.mate.commands.db
 {
 
-	import htmlIndexer.mate.commands.*;
-
 	import flash.events.Event;
+
+	import htmlIndexer.mate.commands.*;
 
 	import nz.co.codec.flexorm.EntityManager;
 

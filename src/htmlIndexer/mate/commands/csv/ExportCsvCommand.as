@@ -7,9 +7,9 @@ package htmlIndexer.mate.commands.csv
 	import flash.filesystem.FileStream;
 
 	import htmlIndexer.mate.business.HtmlIndexerModel;
-	import htmlIndexer.states.HtmlIndexerState;
 	import htmlIndexer.mate.commands.db.DbCommand;
 	import htmlIndexer.mate.vos.LinkVO;
+	import htmlIndexer.states.HtmlIndexerState;
 
 	import mx.collections.ArrayCollection;
 	import mx.collections.IViewCursor;

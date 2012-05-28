@@ -5,12 +5,11 @@
 	<fx:Script>
 		<![CDATA[
 		import htmlIndexer.mate.business.HtmlIndexerModel;
-		import htmlIndexer.mate.commands.BasicCommand;
 		import htmlIndexer.mate.commands.csv.ExportCsvCommand;
-		import htmlIndexer.mate.commands.index.PageIndexCommand;
 		import htmlIndexer.mate.commands.db.DbCloseConnectionCommand;
 		import htmlIndexer.mate.commands.db.DbOpenConnectionCommand;
 		import htmlIndexer.mate.commands.db.DbPageStoreCommand;
+		import htmlIndexer.mate.commands.index.PageIndexCommand;
 		import htmlIndexer.mate.events.HtmlIndexerEvent;
 		]]>
 	</fx:Script>
