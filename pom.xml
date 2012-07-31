@@ -15,10 +15,12 @@
 
 	<properties>
 		<flexmojos-maven-plugin.version>4.2-beta</flexmojos-maven-plugin.version>
-		<flex-framework.version>4.5.1.21328</flex-framework.version>
+		<air-framework.version>4.5.1.21328</air-framework.version>
 		<mate-framework.version>0.8.9</mate-framework.version>
 		<flexorm-framework.version>0.9M1</flexorm-framework.version>
 		<flexunit.version>4.0-rc-1</flexunit.version>
+		<keystore.file>${basedir}/cert.p12</keystore.file>
+		<keystore.password>secret</keystore.password>
 	</properties>
 
 	<build>
@@ -31,6 +33,7 @@
 				<version>${flexmojos-maven-plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+					<sourceFile>HtmlIndexer.mxml</sourceFile>
 					<debug>true</debug>
 					<storepass/>
 				</configuration>
@@ -41,8 +44,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.adobe.flex.framework</groupId>
-			<artifactId>flex-framework</artifactId>
-			<version>${flex-framework.version}</version>
+			<artifactId>air-framework</artifactId>
+			<version>${air-framework.version}</version>
 			<type>pom</type>
 		</dependency>
 
@@ -58,8 +61,6 @@
 			<artifactId>flexorm-framework</artifactId>
 			<version>${flexorm-framework.version}</version>
 			<type>swc</type>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/flexorm-0.9M1-build201205041033.swc</systemPath>
 		</dependency>
 
 		<dependency>
@@ -86,6 +87,11 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+
+		<repository>
+			<id>framzes-third-party-repository</id>
+			<url>http://mvn.framzes.com/content/repositories/thirdparty</url>
 		</repository>
 	</repositories>
 
