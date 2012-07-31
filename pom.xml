@@ -39,6 +39,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.asfusion.mate</groupId>
+			<artifactId>mate-framework</artifactId>
+			<version>0.8.9</version>
+			<type>swc</type>
+		</dependency>
+
+		<dependency>
 			<groupId>com.adobe.flexunit</groupId>
 			<artifactId>flexunit</artifactId>
 			<version>4.0-rc-1</version>
@@ -51,6 +58,17 @@
 		<repository>
 			<id>flex-mojos-repository</id>
 			<url>http://repository.sonatype.org/content/groups/flexgroup</url>
+		</repository>
+
+		<repository>
+			<id>mate-repository</id>
+			<url>http://mate-framework.googlecode.com/svn/trunk/maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
