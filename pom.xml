@@ -46,6 +46,15 @@
 		</dependency>
 
 		<dependency>
+			<groupId>nz.co.codec.flexorm</groupId>
+			<artifactId>flexorm</artifactId>
+			<version>0.9M1</version>
+			<type>swc</type>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/flexorm-0.9M1-build201205041033.swc</systemPath>
+		</dependency>
+
+		<dependency>
 			<groupId>com.adobe.flexunit</groupId>
 			<artifactId>flexunit</artifactId>
 			<version>4.0-rc-1</version>
