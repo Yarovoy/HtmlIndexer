@@ -13,6 +13,14 @@
 
 	<name>html-indexer Flex</name>
 
+	<properties>
+		<flexmojos-maven-plugin.version>4.2-beta</flexmojos-maven-plugin.version>
+		<flex-framework.version>4.5.1.21328</flex-framework.version>
+		<mate-framework.version>0.8.9</mate-framework.version>
+		<flexorm-framework.version>0.9M1</flexorm-framework.version>
+		<flexunit.version>4.0-rc-1</flexunit.version>
+	</properties>
+
 	<build>
 		<sourceDirectory>src/main/flex</sourceDirectory>
 		<testSourceDirectory>src/test/flex</testSourceDirectory>
@@ -20,7 +28,7 @@
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>4.2-beta</version>
+				<version>${flexmojos-maven-plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
 					<debug>true</debug>
@@ -34,21 +42,21 @@
 		<dependency>
 			<groupId>com.adobe.flex.framework</groupId>
 			<artifactId>flex-framework</artifactId>
-			<version>4.5.1.21328</version>
+			<version>${flex-framework.version}</version>
 			<type>pom</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.asfusion.mate</groupId>
 			<artifactId>mate-framework</artifactId>
-			<version>0.8.9</version>
+			<version>${mate-framework.version}</version>
 			<type>swc</type>
 		</dependency>
 
 		<dependency>
 			<groupId>nz.co.codec.flexorm</groupId>
-			<artifactId>flexorm</artifactId>
-			<version>0.9M1</version>
+			<artifactId>flexorm-framework</artifactId>
+			<version>${flexorm-framework.version}</version>
 			<type>swc</type>
 			<scope>system</scope>
 			<systemPath>${basedir}/lib/flexorm-0.9M1-build201205041033.swc</systemPath>
@@ -57,7 +65,7 @@
 		<dependency>
 			<groupId>com.adobe.flexunit</groupId>
 			<artifactId>flexunit</artifactId>
-			<version>4.0-rc-1</version>
+			<version>${flexunit.version}</version>
 			<type>swc</type>
 			<scope>test</scope>
 		</dependency>
@@ -65,7 +73,7 @@
 
 	<repositories>
 		<repository>
-			<id>flex-mojos-repository</id>
+			<id>flexmojos-repository</id>
 			<url>http://repository.sonatype.org/content/groups/flexgroup</url>
 		</repository>
 
@@ -83,7 +91,7 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>flex-mojos-plugin-repository</id>
+			<id>flexmojos-plugin-repository</id>
 			<url>http://repository.sonatype.org/content/groups/flexgroup</url>
 		</pluginRepository>
 	</pluginRepositories>
