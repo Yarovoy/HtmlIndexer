@@ -1,0 +1,20 @@
+type = 'air'
+
+mainClass = 'HtmlIndexer'
+
+air.applicationDescriptor = 'src/main/resources/airdescriptor.xml'
+
+air.keystore = "cert.p12"
+air.storepass = "secret"
+
+air.includeFileTrees = [
+		fileTree(dir: 'src/main/actionscript/')
+]
+
+dependencies {
+	merged project(':core')
+	merged project(':csv')
+
+	merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
+	merged group: 'nz.co.codec.flexorm', name: 'flexorm-framework', version: '0.9M1', ext: 'swc'
+}

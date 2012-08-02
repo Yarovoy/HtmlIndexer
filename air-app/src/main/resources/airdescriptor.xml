@@ -5,7 +5,7 @@
 <filename>HtmlIndexer</filename>
 <name>Html Indexer</name>
 <initialWindow>
-	<content>build/html-indexer.swf</content>
+	<content>build/air-app.swf</content>
 	<width>800</width>
 	<height>600</height>
 	<minimizable>true</minimizable>

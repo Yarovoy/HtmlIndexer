@@ -7,7 +7,7 @@
 	<!-- Application properties -->
 	<property file="${basedir}/application.properties" />
 
-	<property name="SOURCE_DIR" value="${basedir}/src" />
+	<property name="SOURCE_DIR" value="/air-app/src" />
 	<property name="LIBRARY_DIR" value="${basedir}//lib" />
 	<property name="RELEASE_DIR" value="${basedir}/release" />
 	<property name="BUILD_DIR" value="${basedir}/build" />

@@ -7,47 +7,34 @@ buildscript {
 	}
 }
 
-apply plugin: 'gradlefx'
+subprojects {
+	apply plugin: 'gradlefx'
 
-version = '1.0-SNAPSHOT'
+	flexHome = '/Users/yyarovoy/.flexsdk/4.5.1-air3'
 
-flexHome = '/Users/yyarovoy/.flexsdk/4.5.1-air3'
+	version = '1.0-SNAPSHOT'
 
-type = 'air'
+	repositories {
+		mavenLocal()
+		mavenCentral()
 
-mainClass = 'HtmlIndexer'
-
-air.applicationDescriptor = 'src/main/resources/airdescriptor.xml'
-
-air.keystore = "cert.p12"
-air.storepass = "secret"
-
-air.includeFileTrees = [
-		fileTree(dir: 'src/main/actionscript/')
-]
-
-repositories {
-	maven {
-		name 'flexmojos-repository'
-		url 'http://repository.sonatype.org/content/groups/flexgroup'
-	}
-
-	maven {
-		name 'mate-repository'
-		url 'http://mate-framework.googlecode.com/svn/trunk/maven'
-	}
-
-	maven {
-		credentials {
-			username framzesRepoLogin // Must be defined in ./gradle.properties
-			password framzesRepoPassword // Must be defined in ./gradle.properties
+		maven {
+			name 'flexmojos-repository'
+			url 'http://repository.sonatype.org/content/groups/flexgroup'
 		}
-		name 'framzes-third-party'
-		url 'http://mvn.framzes.com/content/repositories/thirdparty'
-	}
-}
 
-dependencies {
-	merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
-	merged group: 'nz.co.codec.flexorm', name: 'flexorm-framework', version: '0.9M1', ext: 'swc'
+		maven {
+			name 'mate-repository'
+			url 'http://mate-framework.googlecode.com/svn/trunk/maven'
+		}
+
+		maven {
+			credentials {
+				username framzesRepoLogin // Must be defined in ./gradle.properties
+				password framzesRepoPassword // Must be defined in ./gradle.properties
+			}
+			name 'framzes-third-party'
+			url 'http://mvn.framzes.com/content/repositories/thirdparty'
+		}
+	}
 }
