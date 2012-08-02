@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/2.6">
+<id>ru.yandex.HtmlIndexer</id>
+<versionNumber>1.2</versionNumber>
+<filename>HtmlIndexer</filename>
+<name>Html Indexer</name>
+<initialWindow>
+	<content>build/html-indexer.swf</content>
+	<width>800</width>
+	<height>600</height>
+	<minimizable>true</minimizable>
+	<maximizable>true</maximizable>
+	<resizable>true</resizable>
+</initialWindow>
+</application>
