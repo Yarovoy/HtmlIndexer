@@ -1,0 +1,15 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.5'
+	}
+}
+
+apply plugin: 'gradlefx'
+version = '1.0-SNAPSHOT'
+
+flexHome = '/Users/yyarovoy/.flexsdk/4.5.1-air3'
+
+type = 'air'
