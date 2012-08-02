@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/2.6">
+
+	<id>HtmlIndexer</id>
+	<filename>HtmlIndexer</filename>
+	<versionNumber>0.0.0</versionNumber>
+	<name>HtmlIndexer</name>
+
+	<description>
+		<text lang="en">Simple application for searching and indexing links on HTML pages and exporting data to CSV
+			format.
+		</text>
+		<text lang="ru">Простое приложение для поиска и индексации ссылок в HTML-страницах, и последующего экспорта
+			полученных данных в формат CSV.
+		</text>
+	</description>
+
+	<initialWindow>
+		<content>${output}</content>
+
+		<title>HTML Indexer</title>
+		<visible>true</visible>
+
+		<minimizable>true</minimizable>
+		<maximizable>true</maximizable>
+		<resizable>true</resizable>
+		<minSize>400 300</minSize>
+	</initialWindow>
+
+</application>
