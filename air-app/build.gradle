@@ -17,4 +17,6 @@ dependencies {
 
 	merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
 	merged group: 'nz.co.codec.flexorm', name: 'flexorm-framework', version: '0.9M1', ext: 'swc'
+
+	test group: 'org.flexunit', name: 'flexunit-air-cilistener', version: '4.1.0-8', ext: 'swc'
 }

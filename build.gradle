@@ -37,4 +37,9 @@ subprojects {
 			url 'http://mvn.framzes.com/content/repositories/thirdparty'
 		}
 	}
+
+	dependencies {
+		test group: 'org.flexunit', name: 'flexunit-tasks', version: '4.1.0-8', ext: 'jar'
+		test group: 'org.flexunit', name: 'flexunit', version: '4.1.0-8', ext: 'swc'
+	}
 }

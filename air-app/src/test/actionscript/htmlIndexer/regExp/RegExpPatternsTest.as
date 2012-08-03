@@ -5,7 +5,7 @@ package htmlIndexer.regExp
 	import org.flexunit.asserts.assertFalse;
 	import org.flexunit.asserts.assertTrue;
 
-	public class RegExpPatternsTests
+	public class RegExpPatternsTest
 	{
 		[Test]
 		public function testUrlPattern():void

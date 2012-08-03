@@ -1,7 +1,5 @@
 package ru.riafactory.data.csv
 {
-
-
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNull;
 
@@ -9,7 +7,7 @@ package ru.riafactory.data.csv
 
 	use namespace riafactory_internal;
 
-	public class CSVTests
+	public class CSVTest
 	{
 
 		// CHECKS:

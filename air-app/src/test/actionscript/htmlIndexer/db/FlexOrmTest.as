@@ -15,7 +15,7 @@ package htmlIndexer.db
 	import org.flexunit.asserts.assertNotNull;
 	import org.flexunit.async.Async;
 
-	public class FlexOrmTests
+	public class FlexOrmTest
 	{
 
 		private var em:EntityManager = EntityManager.instance;
